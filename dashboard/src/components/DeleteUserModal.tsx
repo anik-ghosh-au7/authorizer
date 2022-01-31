@@ -79,7 +79,7 @@ const DeleteUserModal = ({
 						<Flex
 							padding="5%"
 							marginTop="5%"
-							marginBottom="2%"
+							marginBottom="1%"
 							border="1px solid #ff7875"
 							borderRadius="5px"
 							flexDirection="column"
