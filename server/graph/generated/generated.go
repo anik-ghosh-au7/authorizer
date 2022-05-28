@@ -69,6 +69,7 @@ type ComplexityRoot struct {
 		DatabaseURL                func(childComplexity int) int
 		DatabaseUsername           func(childComplexity int) int
 		DefaultRoles               func(childComplexity int) int
+		Disable2fa                 func(childComplexity int) int
 		DisableBasicAuthentication func(childComplexity int) int
 		DisableEmailVerification   func(childComplexity int) int
 		DisableLoginPage           func(childComplexity int) int
@@ -415,6 +416,13 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Env.DefaultRoles(childComplexity), true
+
+	case "Env.DISABLE_2FA":
+		if e.complexity.Env.Disable2fa == nil {
+			break
+		}
+
+		return e.complexity.Env.Disable2fa(childComplexity), true
 
 	case "Env.DISABLE_BASIC_AUTHENTICATION":
 		if e.complexity.Env.DisableBasicAuthentication == nil {
@@ -1464,6 +1472,7 @@ type Env {
 	FACEBOOK_CLIENT_SECRET: String
 	ORGANIZATION_NAME: String
 	ORGANIZATION_LOGO: String
+	DISABLE_2FA: Boolean
 }
 
 type ValidateJWTTokenResponse {
@@ -1512,6 +1521,7 @@ input UpdateEnvInput {
 	FACEBOOK_CLIENT_SECRET: String
 	ORGANIZATION_NAME: String
 	ORGANIZATION_LOGO: String
+	DISABLE_2FA: Boolean
 }
 
 input AdminLoginInput {
@@ -3668,6 +3678,38 @@ func (ec *executionContext) _Env_ORGANIZATION_LOGO(ctx context.Context, field gr
 	res := resTmp.(*string)
 	fc.Result = res
 	return ec.marshalOString2ᚖstring(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) _Env_DISABLE_2FA(ctx context.Context, field graphql.CollectedField, obj *model.Env) (ret graphql.Marshaler) {
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	fc := &graphql.FieldContext{
+		Object:     "Env",
+		Field:      field,
+		Args:       nil,
+		IsMethod:   false,
+		IsResolver: false,
+	}
+
+	ctx = graphql.WithFieldContext(ctx, fc)
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Disable2fa, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		return graphql.Null
+	}
+	res := resTmp.(*bool)
+	fc.Result = res
+	return ec.marshalOBoolean2ᚖbool(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Error_message(ctx context.Context, field graphql.CollectedField, obj *model.Error) (ret graphql.Marshaler) {
@@ -8591,6 +8633,14 @@ func (ec *executionContext) unmarshalInputUpdateEnvInput(ctx context.Context, ob
 			if err != nil {
 				return it, err
 			}
+		case "DISABLE_2FA":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("DISABLE_2FA"))
+			it.Disable2fa, err = ec.unmarshalOBoolean2ᚖbool(ctx, v)
+			if err != nil {
+				return it, err
+			}
 		}
 	}
 
@@ -9050,6 +9100,8 @@ func (ec *executionContext) _Env(ctx context.Context, sel ast.SelectionSet, obj 
 			out.Values[i] = ec._Env_ORGANIZATION_NAME(ctx, field, obj)
 		case "ORGANIZATION_LOGO":
 			out.Values[i] = ec._Env_ORGANIZATION_LOGO(ctx, field, obj)
+		case "DISABLE_2FA":
+			out.Values[i] = ec._Env_DISABLE_2FA(ctx, field, obj)
 		default:
 			panic("unknown field " + strconv.Quote(field.Name))
 		}

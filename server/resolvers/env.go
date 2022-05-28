@@ -70,6 +70,7 @@ func EnvResolver(ctx context.Context) (*model.Env, error) {
 	githubClientSecret := store.StringEnv[constants.EnvKeyGithubClientSecret]
 	organizationName := store.StringEnv[constants.EnvKeyOrganizationName]
 	organizationLogo := store.StringEnv[constants.EnvKeyOrganizationLogo]
+	disable2FA := store.BoolEnv[constants.EnvKeyDisable2FA]
 
 	if accessTokenExpiryTime == "" {
 		accessTokenExpiryTime = "30m"
@@ -119,6 +120,7 @@ func EnvResolver(ctx context.Context) (*model.Env, error) {
 		FacebookClientSecret:       &facebookClientSecret,
 		OrganizationName:           &organizationName,
 		OrganizationLogo:           &organizationLogo,
+		Disable2FA:                 &disable2FA,
 	}
 	return res, nil
 }

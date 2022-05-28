@@ -130,6 +130,7 @@ type Env {
 	FACEBOOK_CLIENT_SECRET: String
 	ORGANIZATION_NAME: String
 	ORGANIZATION_LOGO: String
+	DISABLE_2FA: Boolean
 }
 
 type ValidateJWTTokenResponse {
@@ -178,6 +179,7 @@ input UpdateEnvInput {
 	FACEBOOK_CLIENT_SECRET: String
 	ORGANIZATION_NAME: String
 	ORGANIZATION_LOGO: String
+	DISABLE_2FA: Boolean
 }
 
 input AdminLoginInput {

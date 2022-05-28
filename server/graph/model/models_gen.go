@@ -67,6 +67,7 @@ type Env struct {
 	FacebookClientSecret       *string  `json:"FACEBOOK_CLIENT_SECRET"`
 	OrganizationName           *string  `json:"ORGANIZATION_NAME"`
 	OrganizationLogo           *string  `json:"ORGANIZATION_LOGO"`
+	Disable2fa                 *bool    `json:"DISABLE_2FA"`
 }
 
 type Error struct {
@@ -219,6 +220,7 @@ type UpdateEnvInput struct {
 	FacebookClientSecret       *string  `json:"FACEBOOK_CLIENT_SECRET"`
 	OrganizationName           *string  `json:"ORGANIZATION_NAME"`
 	OrganizationLogo           *string  `json:"ORGANIZATION_LOGO"`
+	Disable2fa                 *bool    `json:"DISABLE_2FA"`
 }
 
 type UpdateProfileInput struct {

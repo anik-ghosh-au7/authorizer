@@ -42,6 +42,7 @@ var defaultStore = &EnvStore{
 			constants.EnvKeyDisableEmailVerification:   false,
 			constants.EnvKeyDisableLoginPage:           false,
 			constants.EnvKeyDisableSignUp:              false,
+			constants.EnvKeyDisable2FA:                 true,
 		},
 		SliceEnv: map[string][]string{},
 	},

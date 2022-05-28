@@ -110,6 +110,8 @@ const (
 	EnvKeyOrganizationLogo = "ORGANIZATION_LOGO"
 	// EnvKeyCustomAccessTokenScript key for env variable CUSTOM_ACCESS_TOKEN_SCRIPT
 	EnvKeyCustomAccessTokenScript = "CUSTOM_ACCESS_TOKEN_SCRIPT"
+	// EnvKeyDisable2FA key for env variable DISABLE_2FA
+	EnvKeyDisable2FA = "DISABLE_2FA"
 
 	// Not Exposed Keys
 	// EnvKeyClientID key for env variable CLIENT_ID
